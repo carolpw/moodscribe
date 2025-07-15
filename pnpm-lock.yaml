@@ -26,6 +26,9 @@ importers:
       react-dom:
         specifier: ^18.2.0
         version: 18.3.1(react@18.3.1)
+      react-icons:
+        specifier: ^5.5.0
+        version: 5.5.0(react@18.3.1)
     devDependencies:
       '@cloudflare/workers-types':
         specifier: ^4.20241022.0
@@ -39,6 +42,9 @@ importers:
       '@types/react-dom':
         specifier: ^18.2.7
         version: 18.3.7(@types/react@18.3.23)
+      '@types/react-icons':
+        specifier: ^3.0.0
+        version: 3.0.0(react@18.3.1)
       '@typescript-eslint/eslint-plugin':
         specifier: ^6.7.4
         version: 6.21.0(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.8.3))(eslint@8.57.1)(typescript@5.8.3)
@@ -1193,6 +1199,10 @@ packages:
     resolution: {integrity: sha512-MEe3UeoENYVFXzoXEWsvcpg6ZvlrFNlOQ7EOsvhI3CfAXwzPfO8Qwuxd40nepsYKqyyVQnTdEfv68q91yLcKrQ==}
     peerDependencies:
       '@types/react': ^18.0.0
+
+  '@types/react-icons@3.0.0':
+    resolution: {integrity: sha512-Vefs6LkLqF61vfV7AiAqls+vpR94q67gunhMueDznG+msAkrYgRxl7gYjNem/kZ+as2l2mNChmF1jRZzzQQtMg==}
+    deprecated: This is a stub types definition. react-icons provides its own type definitions, so you do not need this installed.
 
   '@types/react@18.3.23':
     resolution: {integrity: sha512-/LDXMQh55EzZQ0uVAZmKKhfENivEvWz6E+EYzh+/MCjMhNsotd+ZHhBGIjFDTi6+fz0OhQQQLbTgdQIxxCsC0w==}
@@ -3338,6 +3348,11 @@ packages:
     peerDependencies:
       react: ^18.3.1
 
+  react-icons@5.5.0:
+    resolution: {integrity: sha512-MEFcXdkP3dLo8uumGI5xN3lDFNsRtrjbOEKDLD7yv76v4wpnEq2Lt2qeHaQOr34I/wPN3s3+N08WkQ+CW37Xiw==}
+    peerDependencies:
+      react: '*'
+
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
@@ -5100,6 +5115,12 @@ snapshots:
     dependencies:
       '@types/react': 18.3.23
 
+  '@types/react-icons@3.0.0(react@18.3.1)':
+    dependencies:
+      react-icons: 5.5.0(react@18.3.1)
+    transitivePeerDependencies:
+      - react
+
   '@types/react@18.3.23':
     dependencies:
       '@types/prop-types': 15.7.15
@@ -5285,7 +5306,7 @@ snapshots:
       '@babel/plugin-syntax-typescript': 7.27.1(@babel/core@7.28.0)
       '@vanilla-extract/babel-plugin-debug-ids': 1.2.2
       '@vanilla-extract/css': 1.17.4
-      esbuild: 0.17.6
+      esbuild: 0.17.19
       eval: 0.1.8
       find-up: 5.0.0
       javascript-stringify: 2.1.0
@@ -7709,6 +7730,10 @@ snapshots:
       loose-envify: 1.4.0
       react: 18.3.1
       scheduler: 0.23.2
+
+  react-icons@5.5.0(react@18.3.1):
+    dependencies:
+      react: 18.3.1
 
   react-is@16.13.1: {}
 
