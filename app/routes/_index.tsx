@@ -1,6 +1,5 @@
 import type { MetaFunction, ActionFunctionArgs } from "@remix-run/cloudflare";
 import { Form, useActionData } from "@remix-run/react";
-import { json } from "@remix-run/cloudflare";
 import { useState } from "react";
 
 // 1. Set the page metadata
@@ -19,9 +18,24 @@ export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
   const entry = formData.get("entry");
 
-  // Here we'll later call the AI API
-  return json({ summary: "AI summary goes here (coming soon)", original: entry });
+  // Call the FastAPI backend
+  if (typeof entry !== "string") {
+    return { summary: "No entry provided.", original: "" };
+  }
+
+  const res = await fetch("http://localhost:8000/analyze", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ entry }),
+  });
+
+  const data = await res.json() as { summary: string, recommendation: string };
+  return { summary: data.summary, recommendation: data.recommendation, original: entry };
+
 }
+
 
 // 3. Main UI
 export default function Index() {
@@ -66,12 +80,18 @@ export default function Index() {
 
         {/* 5. AI Response (for now it's mock data) */}
         {actionData?.summary && (
-          <div className="space-y-2 rounded-lg bg-gray-100 p-4 dark:bg-gray-700">
-            <p className="text-sm font-medium text-gray-700 dark:text-gray-200">
-              <strong>Summary:</strong> {actionData.summary}
-            </p>
+          <div className="space-y-4 rounded-lg bg-gray-100 p-4 dark:bg-gray-700">
+            <div>
+              <p className="text-sm font-semibold text-gray-800 dark:text-gray-100">Summary:</p>
+              <p className="text-sm text-gray-700 dark:text-gray-200">{actionData.summary}</p>
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-gray-800 dark:text-gray-100">Recommendation:</p>
+              <p className="text-sm text-gray-700 dark:text-gray-200">{actionData.recommendation}</p>
+            </div>
           </div>
         )}
+
       </div>
     </div>
   );
