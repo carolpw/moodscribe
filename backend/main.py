@@ -3,6 +3,12 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import httpx  # To make HTTP requests
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
+
+api_key = os.getenv("OPENROUTER_API_KEY")
 
 app = FastAPI()
 
@@ -24,7 +30,7 @@ async def analyze_mood(entry: Entry):
         response = await client.post(
             "https://openrouter.ai/api/v1/chat/completions",
             headers={
-                "Authorization": "Bearer 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",
+                "Authorization": f"Bearer {api_key}",
                 "Content-Type": "application/json",
             },
             json={
