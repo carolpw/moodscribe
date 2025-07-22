@@ -5,6 +5,8 @@ from pydantic import BaseModel
 import httpx
 import os
 from dotenv import load_dotenv
+from mangum import Mangum
+import logging
 
 load_dotenv()
 
@@ -21,6 +23,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 class Entry(BaseModel):
     entry: str
@@ -84,4 +89,7 @@ async def analyze_mood(entry: Entry):
 # Health check endpoint
 @app.get("/health")
 async def health_check():
+    logger.info("hello")
     return {"status": "healthy", "api_key_configured": api_key is not None}
+
+handler = Mangum(app)

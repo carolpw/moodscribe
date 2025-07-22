@@ -24,7 +24,7 @@ export async function action({ request }: ActionFunctionArgs) {
   }
 
   try {
-    const res = await fetch("http://localhost:8000/analyze", {
+    const res = await fetch("https://7yx5ndt6qaclpxjy3vfajtwpaa0krylu.lambda-url.eu-north-1.on.aws/analyze", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
